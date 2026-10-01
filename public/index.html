@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ta">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>மகளிர் வழிகாட்டி · Magalir Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;600;800&family=Noto+Serif+Tamil:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+.official{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}
+.official a{display:flex;flex-direction:column;padding:18px;border-radius:18px;background:var(--leaf);color:#fff;text-decoration:none;font-size:1.1rem}
+.official a:hover{background:var(--leaf-d)}
+.help{font:inherit;font-weight:600;padding:14px 20px;border-radius:18px;border:2px solid var(--leaf);background:#fff;color:var(--leaf-d);cursor:pointer}
+@media(max-width:760px){.official{grid-template-columns:1fr}}
+.msg{margin:14px 0 0;font-weight:600;color:#9b2c12}
+.elig{background:#fff;padding:22px;border-radius:18px;box-shadow:0 4px 14px rgba(0,0,0,.1)}
+.elig .q{font-size:1.3rem;margin-top:0}
+.yn{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+.yn button,.go{font:inherit;font-weight:800;font-size:1.2rem;padding:18px;border-radius:18px;border:0;background:var(--leaf);color:#fff;cursor:pointer}
+.yn button[data-a="0"]{background:#8a4b2a}
+.res{font-size:1.25rem;font-weight:600;padding:14px;border-radius:14px}
+.res.yes{background:#dcefd8}.res.no{background:#f7e3cf}
+</style>
+</head>
+<body>
+<header class="bar">
+  <a class="brand" href="#top">மகளிர் வழிகாட்டி <small>Magalir Guide</small></a>
+  <nav><a href="#ask">கேளுங்கள் <small>Ask</small></a><a href="#eligibility">தகுதி <small>Eligibility</small></a><a href="#check">சரிபார்க்க <small>Check</small></a><a href="#docs">ஆவணங்கள் <small>Documents</small></a><a href="#how">எப்படி <small>How</small></a></nav>
+</header>
+<main id="top">
+  <section class="hero">
+    <div class="hero-text">
+      <h1>பேசுங்கள். <br>வழி சொல்கிறோம்.</h1>
+      <p class="en">Speak in your own language. We will guide you to your government scheme.</p>
+      <p class="lead">படிக்கத் தெரிய வேண்டாம். ஆங்கிலம் வேண்டாம். யாரிடமும் கேட்க வேண்டாம்.</p>
+      <img class="photo" src="assets/women.webp" alt="Women learning together on a laptop">
+    </div>
+    <div class="mic-wrap" id="ask">
+      <button id="mic" class="mic" aria-label="பேச அழுத்தவும் / Press to speak">
+        <svg viewBox="0 0 24 24" width="64" height="64" aria-hidden="true"><path fill="currentColor" d="M12 15a4 4 0 0 0 4-4V6a4 4 0 1 0-8 0v5a4 4 0 0 0 4 4zm6-4a6 6 0 0 1-12 0H4a8 8 0 0 0 7 7.9V22h2v-3.1A8 8 0 0 0 20 11h-2z"/></svg>
+      </button>
+      <p id="status" class="status" aria-live="polite">பேச இந்த பொத்தானை அழுத்துங்கள்<br><small>Press the button and speak</small></p>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>1. எந்த திட்டம்? <small>Choose a scheme</small></h2>
+    <div class="schemes" id="schemes">
+      <button type="button" data-s="magalir" class="on"><span class="ico">₹</span><b>மகளிர் உரிமைத் தொகை</b><small>Magalir Urimai Thogai · ₹1,000 / month</small></button>
+      <button type="button" data-s="pmjay"><img src="assets/pmjay.webp" alt=""><b>ஆயுஷ்மான் பாரத் PM-JAY</b><small>Health cover · up to ₹5 lakh</small></button>
+    </div>
+    <h2 class="gap">2. மொழி <small>Language</small></h2>
+    <div class="langs" id="langs">
+      <button type="button" data-l="ta" class="on">தமிழ்</button>
+      <button type="button" data-l="hi">हिन्दी</button>
+      <button type="button" data-l="en">English</button>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>3. கேளுங்கள் <small>Ask</small></h2>
+    <div class="chips" id="chips"></div>
+    <form id="textForm" class="textform">
+      <input id="textInput" type="text" placeholder="இங்கே எழுதுங்கள் · Type here" autocomplete="off">
+      <button type="submit">கேள் <small>Ask</small></button>
+    </form>
+    <p id="msg" class="msg" aria-live="polite"></p>
+    <div id="answerBox" class="answer" hidden>
+      <img class="bot" src="assets/bot.jpg" alt="Helper robot">
+      <div>
+        <p id="answer"></p>
+        <button id="replay" type="button">🔊 மீண்டும் கேள் <small>Listen again</small></button>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" id="eligibility">
+    <h2>தகுதி சரிபார்ப்பு <small>Check eligibility</small></h2>
+    <div id="eligBox" class="elig"></div>
+  </section>
+
+  <section class="panel" id="check">
+    <h2>உங்கள் நிலையைச் சரிபார்க்க <small>Check your status</small></h2>
+    <p>ஆதார் அல்லது குடும்ப அட்டை எண்ணை இந்த தளத்தில் பதிவு செய்ய வேண்டாம். அரசு இணையதளத்தில் மட்டும் பதிவு செய்யுங்கள்.<br><small>Do not type your Aadhaar or ration card number on this site. Enter it only on the official website.</small></p>
+    <div class="official">
+      <a href="https://kmut.tn.gov.in/" target="_blank" rel="noopener"><b>மகளிர் உரிமைத் தொகை</b><small>Official KMUT website</small></a>
+      <a href="https://pmjay.gov.in/" target="_blank" rel="noopener"><b>ஆயுஷ்மான் பாரத் PM-JAY</b><small>Official PM-JAY website</small></a>
+    </div>
+    <button id="statusHelp" type="button" class="help">🔊 எப்படிச் சரிபார்ப்பது? <small>How do I check?</small></button>
+  </section>
+
+  <section class="panel" id="docs">
+    <h2>இவற்றைத் தயாராக வையுங்கள் <small>Keep these ready</small></h2>
+    <div class="docs">
+      <figure><img src="assets/ration-card.jpg" alt="Family (ration) card"><figcaption><b>குடும்ப அட்டை</b> (ரேஷன் அட்டை)<small>Family card</small></figcaption></figure>
+      <figure><img src="assets/aadhaar.jpg" alt="Aadhaar card sample"><figcaption><b>ஆதார் அட்டை</b> (மாதிரி)<small>Aadhaar card (sample)</small></figcaption></figure>
+    </div>
+    <p class="en">A bank passbook and a mobile number linked with Aadhaar are also needed for Magalir Urimai Thogai.</p>
+  </section>
+
+  <section class="panel" id="how">
+    <h2>எப்படி வேலை செய்கிறது <small>How it works</small></h2>
+    <ol class="steps">
+      <li><b>தேர்ந்தெடுங்கள்</b> திட்டம் மற்றும் மொழி. <small>Pick a scheme and language.</small></li>
+      <li><b>பேசுங்கள்</b> மஞ்சள் பொத்தானை அழுத்தி கேள்வியைச் சொல்லுங்கள். <small>Press the yellow button and speak.</small></li>
+      <li><b>கேளுங்கள்</b> எளிய பதில் உரக்கப் படிக்கப்படும். <small>Hear a simple answer read aloud.</small></li>
+      <li><b>செல்லுங்கள்</b> ஆவணங்களுடன் அருகிலுள்ள அலுவலகம் செல்லுங்கள். <small>Go to the office with your documents.</small></li>
+    </ol>
+    <p class="en">Built for the Hack2Skill PromptWars × HackArena challenge “The Invisible Woman”. Answers come from Gemini; always confirm details at the official office.</p>
+  </section>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
